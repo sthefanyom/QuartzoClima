@@ -14,20 +14,37 @@ cityInput.addEventListener("keypress", (e) => {
   }
 });
 
-// Mapeamento dos códigos da API Open-Meteo
+// Mapeamento completo dos códigos da API Open-Meteo
 const weatherCodes = {
-  0: { desc: "Céu limpo", icon: "☀️" },
-  1: { desc: "Principalmente limpo", icon: "🌤️" },
-  2: { desc: "Parcialmente nublado", icon: "⛅" },
-  3: { desc: "Nublado", icon: "☁️" },
+  0:  { desc: "Céu limpo", icon: "☀️" },
+  1:  { desc: "Principalmente limpo", icon: "🌤️" },
+  2:  { desc: "Parcialmente nublado", icon: "⛅" },
+  3:  { desc: "Nublado", icon: "☁️" },
   45: { desc: "Nevoeiro", icon: "🌫️" },
-  48: { desc: "Nevoeiro gelado", icon: "🌫️" },
+  48: { desc: "Nevoeiro gelado", icon: "🌫️❄️" },
   51: { desc: "Garoa leve", icon: "🌦️" },
-  61: { desc: "Chuva leve", icon: "🌧️" },
+  53: { desc: "Garoa moderada", icon: "🌧️" },
+  55: { desc: "Garoa intensa", icon: "🌧️" },
+  56: { desc: "Garoa congelante leve", icon: "🌨️" },
+  57: { desc: "Garoa congelante forte", icon: "🌨️❄️" },
+  61: { desc: "Chuva leve", icon: "🌦️" },
   63: { desc: "Chuva moderada", icon: "🌧️" },
-  65: { desc: "Chuva forte", icon: "🌧️" },
-  80: { desc: "Aguaceiros", icon: "🌦️" },
-  95: { desc: "Trovoadas", icon: "⛈️" },
+  65: { desc: "Chuva forte", icon: "🌧️☔" },
+  66: { desc: "Chuva congelante leve", icon: "🌨️" },
+  67: { desc: "Chuva congelante forte", icon: "🌨️❄️" },
+  71: { desc: "Neve leve", icon: "🌨️" },
+  73: { desc: "Neve moderada", icon: "❄️" },
+  75: { desc: "Neve forte", icon: "❄️🌨️" },
+  77: { desc: "Grãos de neve", icon: "🌨️" },
+  80: { desc: "Aguaceiros leves", icon: "🌦️" },
+  81: { desc: "Aguaceiros moderados", icon: "🌧️" },
+  82: { desc: "Aguaceiros fortes", icon: "⛈️" },
+  85: { desc: "Aguaceiros de neve leves", icon: "🌨️" },
+  86: { desc: "Aguaceiros de neve fortes", icon: "❄️🌨️" },
+  95: { desc: "Trovoadas leves ou moderadas", icon: "🌩️" },
+  96: { desc: "Trovoadas com granizo leve", icon: "🌩️🌧️" },
+  99: { desc: "Trovoadas com granizo forte", icon: "⛈️🌪️" },
+  default: { desc: "Desconhecido", icon: "❓" }
 };
 
 // 🔍 Evento de busca
@@ -55,19 +72,20 @@ searchBtn.addEventListener("click", async () => {
 
     // 2️⃣ Buscar dados do clima
     const weatherResponse = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weathercode&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto&forecast_days=7`
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=7`
     );
     const weatherData = await weatherResponse.json();
 
-    // 🌤️ Clima atual
-    const current = weatherData.current;
-    const currentWeather = weatherCodes[current.weathercode] || { desc: "Desconhecido", icon: "❓" };
+    // 🌦️ Clima atual
+    const currentWeatherCode = weatherData.current.weather_code;
+    const temperatureNow = weatherData.current.temperature_2m;
+
+    const weather = weatherCodes[currentWeatherCode] || weatherCodes.default;
 
     cityName.textContent = `${name}, ${country}`;
-    temperature.textContent = `${current.temperature_2m.toFixed(1)}°C`;
-    description.textContent = `${currentWeather.desc} ${currentWeather.icon}`;
-    weatherIcon.innerHTML = currentWeather.icon;
-
+    temperature.textContent = `${temperatureNow.toFixed(1)}°C`;
+    description.textContent = `${weather.desc} ${weather.icon}`;
+    weatherIcon.innerHTML = weather.icon;
     weatherInfo.classList.remove("hidden");
 
     // 📅 Previsão semanal
@@ -77,12 +95,11 @@ searchBtn.addEventListener("click", async () => {
     console.error(error);
     errorMessage.textContent = "⚠️ " + error.message;
     errorMessage.classList.remove("hidden");
-    // Limpa previsão antiga quando ocorre erro
+
     const oldForecast = document.getElementById("forecast");
     if (oldForecast) oldForecast.remove();
 
   } finally {
-    // 🔁 Sempre restaurar o botão, mesmo se der erro
     searchBtn.disabled = false;
     searchBtn.textContent = "Buscar";
   }
@@ -90,7 +107,6 @@ searchBtn.addEventListener("click", async () => {
 
 // Função para criar os cards de previsão da semana
 function createForecast(daily) {
-  // Remove previsão anterior, se houver
   const oldForecast = document.getElementById("forecast");
   if (oldForecast) oldForecast.remove();
 
@@ -103,8 +119,8 @@ function createForecast(daily) {
     const options = { weekday: "short", day: "2-digit", month: "2-digit" };
     const dayName = date.toLocaleDateString("pt-BR", options);
 
-    const code = daily.weathercode[i];
-    const iconData = weatherCodes[code] || { desc: "Desconhecido", icon: "❓" };
+    const code = daily.weather_code[i];
+    const iconData = weatherCodes[code] || weatherCodes.default;
     const max = daily.temperature_2m_max[i].toFixed(1);
     const min = daily.temperature_2m_min[i].toFixed(1);
 
