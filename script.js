@@ -7,6 +7,13 @@ const temperature = document.getElementById("temperature");
 const description = document.getElementById("description");
 const errorMessage = document.getElementById("error-message");
 
+// Permitir buscar com Enter
+cityInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    searchBtn.click();
+  }
+});
+
 // Mapeamento dos códigos da API Open-Meteo
 const weatherCodes = {
   0: { desc: "Céu limpo", icon: "☀️" },
@@ -29,6 +36,8 @@ searchBtn.addEventListener("click", async () => {
   if (!city) return;
 
   try {
+    searchBtn.disabled = true;
+    searchBtn.textContent = "Buscando...";
     errorMessage.classList.add("hidden");
     weatherInfo.classList.add("hidden");
 
@@ -64,8 +73,10 @@ searchBtn.addEventListener("click", async () => {
     // 📅 Previsão semanal
     createForecast(weatherData.daily);
   } catch (error) {
+    searchBtn.disabled = false;
+    searchBtn.textContent = "Buscar";
     console.error(error);
-    errorMessage.textContent = error.message;
+    errorMessage.textContent = "⚠️ " + error.message;
     errorMessage.classList.remove("hidden");
   }
 });

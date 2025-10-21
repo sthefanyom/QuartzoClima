@@ -142,3 +142,47 @@ footer {
   align-items: center;
   justify-content: center;
 }
+/* ===== Refinamentos visuais Quartzo Clima ===== */
+
+/* Animação suave ao mostrar info */
+#weather-info {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efeito ao focar no campo */
+input:focus {
+  outline: none;
+  border-color: var(--azul-principal);
+  box-shadow: 0 0 8px var(--rosa-suave);
+}
+
+/* Botão com leve clique */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Forecast cards com gradiente */
+.day-card {
+  background: linear-gradient(135deg, var(--branco-neve), var(--azul-claro));
+  color: var(--azul-principal);
+}
+
+/* Rodapé com toque especial */
+footer {
+  letter-spacing: 0.5px;
+}
+footer p::before {
+  content: "💎 ";
+}
