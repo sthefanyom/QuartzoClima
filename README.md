@@ -1,160 +1,99 @@
-💎 Quartzo Clima
-<p align="center"> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5"> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"> <img src="https://img.shields.io/badge/API-Open--Meteo-blue?style=for-the-badge" alt="API Open-Meteo"> </p>
-Um aplicativo web elegante e responsivo para consulta de previsão do tempo em qualquer cidade do mundo. Desenvolvido com tecnologias web puras e inspirado na identidade visual da Quartzo Sollutions.
+# 💎 Quartzo Clima
 
-https://via.placeholder.com/800x400/0F2C50/FFFFFF?text=Quartzo+Clima+-+Previs%C3%A3o+do+Tempo+Elegante
+Um app web leve e intuitivo que mostra o clima atual e a previsão dos próximos 7 dias de qualquer cidade do mundo. Inspirado na identidade visual da Quartzo Sollutions, o projeto prioriza simplicidade, acessibilidade e desempenho — perfeito para um portfólio limpo e funcional.
 
-🌟 Destaques
-🎯 Interface intuitiva - Design limpo e fácil de usar
+---
 
-🌍 Cobertura global - Busque o clima de qualquer cidade do mundo
+## 🌤️ Funcionalidades
 
-📱 Totalmente responsivo - Funciona perfeitamente em todos os dispositivos
+- 🔎 Buscar clima atual de qualquer cidade digitando o nome.  
+- 🌡️ Exibir temperatura atual, descrição e um emoji representando a condição climática.  
+- 📅 Mostrar previsão dos próximos 7 dias (temperaturas mínimas e máximas).  
+- 🖥️ Interface moderna, responsiva e acessível para desktop e dispositivos móveis.  
+- ⚠️ Tratamento de erros quando a cidade não é encontrada ou há problemas de conexão.
 
-⚡ Performance otimizada - Carregamento rápido e eficiente
+---
 
-🎨 Design moderno - Paleta de cores inspirada no quartzo
+## ⚙️ Tecnologias utilizadas
 
-🚀 Começando
-Pré-requisitos
-Navegador web moderno (Chrome, Firefox, Safari, Edge)
+- HTML5  
+- CSS3  
+- JavaScript puro (Vanilla JS)  
+- API pública: Open-Meteo (Geocoding + Forecast)
 
-Conexão com internet
+---
 
-Instalação
-Clone o repositório
+## 🎨 Paleta de cores
 
-bash
-git clone https://github.com/sthefanyom/QuartzoClima.git
-Acesse a pasta do projeto
+| Cor | Hex | Uso |
+|---|---:|---|
+| Azul Principal | `#0F2C50` | Cabeçalho e menus |
+| Azul Claro | `#A6C4DC` | Fundo de seções |
+| Rosa Suave | `#ECA8B0` | Botões e destaques |
+| Branco Neve | `#F9F9F9` | Fundo e cartões |
+| Cinza Azulado | `#6D8BA0` | Detalhes neutros |
 
-bash
-cd QuartzoClima
-Abra o arquivo principal
+---
 
-bash
-# Simplesmente abra o arquivo index.html no seu navegador
-# ou use um servidor local se preferir:
+## 🧠 Como funciona
+
+1. O usuário digita o nome da cidade no campo de busca.  
+2. A aplicação usa a API de Geocoding da Open-Meteo para obter latitude e longitude.  
+3. Com as coordenadas, a app consulta a API de Forecast da Open-Meteo.  
+4. Os dados retornados são processados e exibidos: clima atual + previsão para 7 dias.  
+5. Em caso de erro (cidade não encontrada ou falha na API), o usuário vê uma mensagem clara e sugestiva.
+
+---
+
+## 🚀 Como executar o projeto
+
+1. Clone o repositório:
+   ```
+   git clone https://github.com/sthefanyom/QuartzoClima.git
+   ```
+2. Navegue até a pasta do projeto:
+   ```
+   cd QuartzoClima
+   ```
+3. Abra o arquivo `index.html` no navegador (não é necessário servidor):
+   - Clique duas vezes em `index.html` ou arraste-o para o navegador.
+
+Opcional: usar um servidor local (ex. Python) para testar:
+```
 python -m http.server 8000
-# depois acesse: http://localhost:8000
-💡 Como Usar
-Digite o nome da cidade no campo de busca
+# Em seguida acesse: http://localhost:8000
+```
 
-Pressione Enter ou clique no botão de busca
+---
 
-Visualize as informações do clima atual e previsão para 7 dias
+## 🧩 Estrutura de pastas
 
-Explore diferentes cidades para comparar condições climáticas
+QuartzoClima/  
+├── index.html  
+├── style.css  
+├── script.js  
+└── README.md
 
-🛠️ Tecnologias
-Frontend: HTML5, CSS3, JavaScript (ES6+)
+---
 
-API: Open-Meteo - Dados meteorológicos gratuitos
+## 💡 Próximos passos
 
-Design: CSS Grid, Flexbox, Design Responsivo
+- 🌍 Suporte a múltiplos idiomas.  
+- ☁️ Ícones animados para condições climáticas.  
+- ⭐ Favoritos e histórico de buscas.  
+- 🌙 Modo escuro.  
+- 📊 Gráficos interativos de temperatura.
 
-Ícones: Emojis nativos para representação climática
+---
 
-🎨 Design System
-Componente	Cor	Hexadecimal
-Primária	Azul Quartzo	#0F2C50
-Secundária	Azul Claro	#A6C4DC
-Destaque	Rosa Suave	#ECA8B0
-Fundo	Branco Neve	#F9F9F9
-Texto	Cinza Azulado	#6D8BA0
-📁 Estrutura do Projeto
-text
-QuartzoClima/
-├── 📄 index.html          # Estrutura principal
-├── 🎨 style.css           # Estilos e design
-├── ⚡ script.js           # Lógica da aplicação
-├── 📖 README.md           # Documentação
-└── 🖼️ assets/            # Recursos visuais (se houver)
-🔧 Funcionalidades
-Principais
-✅ Busca por nome da cidade
+## 👩‍💻 Autora
 
-✅ Clima atual com temperatura e condições
+Sthefany Oliveira  
+💎 Fundadora da Quartzo Sollutions  
+🚀 Apaixonada por tecnologia, aprendizado e segurança da informação.
 
-✅ Previsão de 7 dias
+> 🪶 “Inspirado pela ideia de que o conhecimento é como o clima — muda o tempo todo, mas sempre traz algo novo.”
 
-✅ Representação visual com emojis
+---
 
-✅ Interface responsiva
-
-Técnicas
-✅ Consumo de API REST
-
-✅ Tratamento de erros
-
-✅ Validação de entrada
-
-✅ Loading states
-
-✅ Mensagens de feedback
-
-🌐 API Utilizada
-O projeto utiliza a Open-Meteo API, oferecendo:
-
-Dados meteorológicos gratuitos
-
-Previsão de 7 dias
-
-Geocoding para busca de cidades
-
-Alta disponibilidade e confiabilidade
-
-🚧 Desenvolvimento
-Próximas Funcionalidades
-🌡️ Conversor de unidades (Celsius/Fahrenheit)
-
-⭐ Favoritos e histórico de buscas
-
-🌙 Modo escuro
-
-📍 Clima por localização automática
-
-📊 Gráficos de temperatura
-
-🔔 Alertas climáticos
-
-🤝 Contribuindo
-Contribuições são sempre bem-vindas!
-
-Fork o projeto
-
-Crie uma branch para sua feature (git checkout -b feature/AmazingFeature)
-
-Commit suas mudanças (git commit -m 'Add some AmazingFeature')
-
-Push para a branch (git push origin feature/AmazingFeature)
-
-Abra um Pull Request
-
-📄 Licença
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
-👩‍💻 Autora
-Sthefany Oliveira - @sthefanyom
-
-💎 Fundadora da Quartzo Sollutions
-
-🚀 Desenvolvedora Full Stack
-
-🌱 Apaixonada por tecnologia e educação
-
-📫 Contato: LinkedIn
-
-🙏 Agradecimentos
-Open-Meteo pela API gratuita e confiável
-
-Comunidade de desenvolvedores por compartilhar conhecimento
-
-Todos os usuários que testaram e forneceram feedback
-
-<div align="center">
-Feito com 💙, ☕ e muito código
-
-⭐ Deixe uma estrela no repositório se este projeto te ajudou!
-
-</div>
+Se este projeto te ajudou ou inspirou, deixe uma estrela no repositório ⭐ — contribuições e sugestões são muito bem-vindas!
