@@ -35,12 +35,12 @@ searchBtn.addEventListener("click", async () => {
   const city = cityInput.value.trim();
   if (!city) return;
 
-  try {
-    searchBtn.disabled = true;
-    searchBtn.textContent = "Buscando...";
-    errorMessage.classList.add("hidden");
-    weatherInfo.classList.add("hidden");
+  searchBtn.disabled = true;
+  searchBtn.textContent = "Buscando...";
+  errorMessage.classList.add("hidden");
+  weatherInfo.classList.add("hidden");
 
+  try {
     // 1️⃣ Buscar latitude e longitude
     const geoResponse = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=pt&format=json`
@@ -72,12 +72,19 @@ searchBtn.addEventListener("click", async () => {
 
     // 📅 Previsão semanal
     createForecast(weatherData.daily);
+
   } catch (error) {
-    searchBtn.disabled = false;
-    searchBtn.textContent = "Buscar";
     console.error(error);
     errorMessage.textContent = "⚠️ " + error.message;
     errorMessage.classList.remove("hidden");
+    // Limpa previsão antiga quando ocorre erro
+    const oldForecast = document.getElementById("forecast");
+    if (oldForecast) oldForecast.remove();
+
+  } finally {
+    // 🔁 Sempre restaurar o botão, mesmo se der erro
+    searchBtn.disabled = false;
+    searchBtn.textContent = "Buscar";
   }
 });
 
